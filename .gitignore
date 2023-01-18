@@ -184,3 +184,6 @@ logs/
 *.log.*.bz2
 *.log.*.xz
 *.log.*.lzma
+
+# VSCode
+.vscode/

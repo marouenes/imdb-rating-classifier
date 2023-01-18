@@ -49,7 +49,7 @@ class Scraper:
            - static typing to the class?
     """
 
-    def __init__(self, number_of_movies: int = 20, url: str = IMDB_URL):
+    def __init__(self, number_of_movies: int, url: str = IMDB_URL):
         """
         Initialize Scraper class.
 
@@ -90,7 +90,7 @@ class Scraper:
             movie_url = movie.select_one(IMDB_MOVIE_URL_SELECTOR).get('href')
             movie_poster_url = movie.select_one(IMDB_MOVIE_POSTER_URL_SELECTOR).get('src')
 
-            # create movie data object
+            # create a movie data object
             movie_data = {
                 'rank': movie_rank,
                 'title': movie_title,
