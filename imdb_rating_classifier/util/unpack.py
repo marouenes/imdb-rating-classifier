@@ -13,6 +13,13 @@ def unpack_contents(response: requests.Response, cutoff: str = None) -> list[dic
     """
     Helper method to unpack the contents from request response,
     reporting errors in a helpful manner, if any.
+
+    Args:
+        response (requests.Response): request response.
+        cutoff (str, optional): cutoff. Defaults to None.
+
+    Returns:
+        list[dict[str, t.Any]]: list of dictionaries.
     """
     try:
         if response.status_code == 200 and cutoff is None:
