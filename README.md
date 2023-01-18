@@ -8,7 +8,18 @@ The application scrapes data from IMDB and adjusts the rating system according t
 
 ## Requirements
 
-TBD
+- Python>=3.8>=3.10
+- BeautifulSoup4
+- requests
+- pytest
+- tox
+- click
+- pre-commit
+- flake8
+- black
+- isort
+
+and more...
 
 ## Installation
 
@@ -42,6 +53,18 @@ pip install -r requirements-dev.txt
 
 ```console
 foo@bar:~/imdb-rating-classifier$ python imdb_rating_classifier/generate.py
+```
+
+- Run the application with a specific number of movies
+
+```console
+foo@bar:~/imdb-rating-classifier$ python imdb_rating_classifier/generate.py --number-of-movies 10
+```
+
+- Run the application with a specific number of movies and a specific output file
+
+```console
+foo@bar:~/imdb-rating-classifier$ python imdb_rating_classifier/generate.py --output data.csv
 ```
 
 ## Testing
