@@ -1,4 +1,4 @@
-# IMDB rating classifer
+# IMDB rating classifier
 
 This is a simple IMDB rating classifier using the IMDB charts API.
 

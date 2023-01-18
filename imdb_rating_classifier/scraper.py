@@ -20,9 +20,12 @@ from bs4 import BeautifulSoup
 from imdb_rating_classifier.util.unpack import unpack_contents
 
 # initialize logger
-logger = logging.getLogger(__name__)
+logger = logging.getLogger('imdb_rating_classifier')
 logger.setLevel(logging.INFO)
-formatter = logging.Formatter('%(asctime)s:%(levelname)s:%(name)s:%(message)s')
+formatter = logging.Formatter(
+    '%(asctime)s:%(name)s:%(levelname)s:%(message)s',
+    datefmt='[%Y-%m-%d][%H:%M:%S]',
+)
 # prints the log message to the console
 stream_handler = logging.StreamHandler()
 stream_handler.setFormatter(formatter)

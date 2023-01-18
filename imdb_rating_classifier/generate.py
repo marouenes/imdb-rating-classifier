@@ -21,16 +21,11 @@ CONTEXT_SETTINGS = dict(help_option_names=['-h', '--help'])
     context_settings=CONTEXT_SETTINGS,
     help='Application entry point for IMDB rating classifier.',
 )
-@click.pass_context
-def main(ctx: click.Context) -> None:
+def main() -> None:
     """
     Application entry point for IMDB rating classifier.
-
-    Args:
-        ctx (click.Context): The click context.
     """
-    if ctx.invoked_subcommand is None:
-        print(ctx.get_help())
+    pass
 
 
 @click.command()
@@ -75,6 +70,7 @@ def generate(output: str, number_of_movies: int = 20) -> None:
     logger.info('Done!')
 
 
+# add commands to main
 main.add_command(generate)
 
 
