@@ -41,19 +41,35 @@ and more...
   foo@bar:~/imdb-rating-classifier$ source .venv/bin/activate
   ```
 
-- Install the requirements in dev mode
+For development:
 
-```bash
-pip install -r requirements-dev.txt
-```
+- Install the dependencies
+
+  ```console
+  foo@bar:~/imdb-rating-classifier$ pip install -r requirements-dev.txt
+  ```
+
+- Install the pre-commit hooks
+
+  ```console
+    foo@bar:~/imdb-rating-classifier$ pre-commit install
+  ```
+
+For usage:
+
+- Install the dependencies
+
+  ```console
+  foo@bar:~/imdb-rating-classifier$ pip install -e .
+  ```
 
 ## Usage
 
 - Display the help message and the available commands
 
 ```console
-foo@bar:~/imdb-rating-classifier$ python imdb_rating_classifier/generate.py --help
-Usage: generate.py generate [OPTIONS]
+foo@bar:~$ imdb-rating-classifier generate --help
+Usage: imdb-rating-classifier generate [OPTIONS]
 
   Generate the output dataset containing both the original and adjusted
   ratings.
@@ -66,22 +82,22 @@ Options:
   -h, --help                  Show this message and exit.
 ```
 
-- Run the application
+- Run the application with the default number of movies (20) and the default output file (data.csv)
 
-```console
-foo@bar:~/imdb-rating-classifier$ python imdb_rating_classifier/generate.py
+```bash
+imdb-rating-classifier generate
 ```
 
 - Run the application with a specific number of movies
 
-```console
-foo@bar:~/imdb-rating-classifier$ python imdb_rating_classifier/generate.py --number-of-movies 10
+```bash
+imdb-rating-classifier generate --number-of-movies 100
 ```
 
 - Run the application with a specific number of movies and a specific output file
 
-```console
-foo@bar:~/imdb-rating-classifier$ python imdb_rating_classifier/generate.py --output data.csv
+```bash
+imdb-rating-classifier generate --number-of-movies 100 --output some_name.csv
 ```
 
 ## Testing
@@ -91,6 +107,11 @@ foo@bar:~/imdb-rating-classifier$ python imdb_rating_classifier/generate.py --ou
 ```console
 foo@bar:~/imdb-rating-classifier$ tox
 ```
+
+## CI/CD
+
+The application is automatically tested, packaged and deployed to PyPI, It is also automatically
+tested and built using tox as an environment orchestrator and GitHub Actions.
 
 ## License
 
