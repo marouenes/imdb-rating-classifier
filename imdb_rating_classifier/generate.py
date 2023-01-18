@@ -21,11 +21,16 @@ CONTEXT_SETTINGS = dict(help_option_names=['-h', '--help'])
     context_settings=CONTEXT_SETTINGS,
     help='Application entry point for IMDB rating classifier.',
 )
-def main() -> None:
+@click.pass_context
+def main(ctx: click.Context) -> None:
     """
     Application entry point for IMDB rating classifier.
+
+    Args:
+        ctx (click.Context): The click context.
     """
-    pass
+    if ctx.invoked_subcommand is None:
+        print(ctx.get_help())
 
 
 @click.command()
