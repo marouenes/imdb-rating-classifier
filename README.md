@@ -57,10 +57,10 @@ For development:
 
 For usage:
 
-- Install the dependencies
+- Install the dependencies and build the wheel
 
   ```console
-  foo@bar:~/imdb-rating-classifier$ pip install -e .
+    foo@bar:~/imdb-rating-classifier$ pip install -e .
   ```
 
 ## Usage
@@ -110,12 +110,20 @@ foo@bar:~/imdb-rating-classifier$ tox
 
 ## CI/CD
 
-The application is automatically tested, packaged and deployed to PyPI, It is also automatically
-tested and built using tox as an environment orchestrator and GitHub Actions.
+The application is automatically packaged and distributed to PyPI, It is also automatically
+tested using tox as an environment orchestrator and GitHub Actions.
+
+## TODO
+
+- [ ] Add more tests
+- [ ] Add more validation rules
+- [ ] Add more documentation
+- [ ] Add more features
+- [ ] Publish the package on PyPI
 
 ## License
 
-MIT
+MIT License
 
 ## Author
 
