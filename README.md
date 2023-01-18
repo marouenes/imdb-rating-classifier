@@ -23,6 +23,8 @@ and more...
 
 ## Installation
 
+For development purposes:
+
 - Clone the repository
 
   ```console
@@ -41,7 +43,7 @@ and more...
   foo@bar:~/imdb-rating-classifier$ source .venv/bin/activate
   ```
 
-- Install the dependencies for development
+- Install the dev dependencies
 
   ```console
   foo@bar:~/imdb-rating-classifier$ pip install -r requirements-dev.txt
