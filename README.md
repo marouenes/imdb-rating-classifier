@@ -41,9 +41,7 @@ and more...
   foo@bar:~/imdb-rating-classifier$ source .venv/bin/activate
   ```
 
-For development:
-
-- Install the dependencies
+- Install the dependencies for development
 
   ```console
   foo@bar:~/imdb-rating-classifier$ pip install -r requirements-dev.txt
@@ -52,7 +50,7 @@ For development:
 - Install the pre-commit hooks
 
   ```console
-    foo@bar:~/imdb-rating-classifier$ pre-commit install
+  foo@bar:~/imdb-rating-classifier$ pre-commit install
   ```
 
 For usage:
@@ -60,7 +58,7 @@ For usage:
 - Install the dependencies and build the wheel
 
   ```console
-    foo@bar:~/imdb-rating-classifier$ pip install -e .
+  foo@bar:~/imdb-rating-classifier$ pip install -e .
   ```
 
 ## Usage
