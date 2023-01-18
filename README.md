@@ -49,6 +49,23 @@ pip install -r requirements-dev.txt
 
 ## Usage
 
+- Display the help message and the available commands
+
+```console
+foo@bar:~/imdb-rating-classifier$ python imdb_rating_classifier/generate.py --help
+Usage: generate.py generate [OPTIONS]
+
+  Generate the output dataset containing both the original and adjusted
+  ratings.
+
+  Args:     output (str): The path to the output file.
+
+Options:
+  --output FILE               The path to the output file.
+  --number-of-movies INTEGER  The number of movies to scrape.
+  -h, --help                  Show this message and exit.
+```
+
 - Run the application
 
 ```console
