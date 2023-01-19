@@ -41,7 +41,7 @@ def main(ctx: click.Context) -> None:
 @click.option(
     '--output',
     type=click.Path(exists=False, file_okay=True, dir_okay=False),
-    default=f'{BASE_DIR}/data/movies.csv',
+    default='movies.csv',
     help='The path to the output file.',
 )
 @click.option(
