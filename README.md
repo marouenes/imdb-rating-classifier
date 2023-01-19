@@ -1,10 +1,88 @@
 # IMDB rating classifier
 
-This is a simple IMDB rating classifier using the IMDB charts API.
+This is a simple IMDB rating classifier application using the IMDB charts API.
 
 ## Overview
 
-The application scrapes data from IMDB and adjusts the rating system according to some specific validation rules.
+The application scrapes data from [IMDB](https://www.imdb.com/chart/top/) and adjusts the rating system according to some specific validation rules.
+
+The data is scraped from the IMDB charts API using the [BeautifulSoup](https://www.crummy.com/software/BeautifulSoup/bs4/doc/) library.
+
+The data structure of the parsed payload is as follows (example):
+
+```json
+{
+  "rank": "1",
+  "title": "The Shawshank Redemption",
+  "year": "1994",
+  "rating": "9.2",
+  "votes": "2,223,000",
+  "url": "/title/tt0111161/",
+  "poster_url": "https://m.media-amazon.com/images/wNjQ5NjU3MjE@._V1_SX300.jpg",
+  "penalized": false
+}
+```
+
+We would then, extract the following fields, into a dataframe:
+
+```python
+- rank (int)
+- title (str)
+- year (int)
+- rating (float)
+- votes (int)
+- url (str)
+- poster_url (str)
+- penalized (bool)
+```
+
+Using Typedframes, we can then, preprocess the data against some schema definition rules.
+
+The schema definition rules are as follows:
+
+```python
+schema = {
+    "rank": {
+        "type": "int",
+        "min": 1,
+        "max": 250,
+        "required": True,
+    },
+    "title": {
+        "type": "str",
+        "required": True,
+    },
+    "year": {
+        "type": "int",
+        "min": 1900,
+        "max": 2023,
+        "required": True,
+    },
+    "rating": {
+        "type": "float",
+        "min": 0.0,
+        "max": 10.0,
+        "required": True,
+    },
+    "votes": {
+        "type": "int",
+        "min": 0,
+        "required": True,
+    },
+    "url": {
+        "type": "str",
+        "required": True,
+    },
+    "poster_url": {
+        "type": "str",
+        "required": True,
+    },
+    "penalized": {
+        "type": "bool",
+        "required": True,
+    },
+}
+```
 
 ## Requirements
 
@@ -74,7 +152,7 @@ Usage: imdb-rating-classifier generate [OPTIONS]
   Generate the output dataset containing both the original and adjusted
   ratings.
 
-  Args:     output (str): The path to the output file.
+  An extra JSON file will be generated alongside the csv file
 
 Options:
   --output FILE               The path to the output file.
@@ -116,10 +194,11 @@ tested using tox as an environment orchestrator and GitHub Actions.
 ## TODO
 
 - [ ] Add more tests
-- [ ] Add more validation rules
-- [ ] Add more documentation
+- [X] Add more validation rules
+- [X] Add more documentation
 - [ ] Add more features
 - [ ] Publish the package on PyPI
+- [-] Add oscar awards or nominations for the movies
 
 ## License
 
