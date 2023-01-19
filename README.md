@@ -197,8 +197,8 @@ tested using tox as an environment orchestrator and GitHub Actions.
 - [X] Add more validation rules
 - [X] Add more documentation
 - [ ] Add more features
-- [ ] Publish the package on PyPI
-- [-] Add oscar awards or nominations for the movies
+- [X] Publish the package on PyPI
+- [ ] Add oscar awards or nominations for the movies
 
 ## License
 
