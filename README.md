@@ -141,6 +141,12 @@ For usage:
   foo@bar:~/imdb-rating-classifier$ pip install -e .
   ```
 
+The application is publicly available and published on [PyPI](https://pypi.org/project/imdb-rating-classifier/) and can be installed using pip:
+
+```console
+foo@bar:~$ pip install imdb-rating-classifier
+```
+
 ## Usage
 
 - Display the help message and the available commands
