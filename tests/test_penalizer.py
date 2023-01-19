@@ -1,5 +1,6 @@
 """
 Unit tests for imdb_rating_classifier/penalizer.py
+@TODO: parametrize the test_penalize_reviews function?
 """
 from __future__ import annotations
 

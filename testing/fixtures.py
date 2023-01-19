@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import json
 import tempfile
+from pathlib import Path
 from typing import Any
 
 import pytest
@@ -25,3 +26,12 @@ def assert_json_equal(left: dict[str, Any], right: dict[str, Any]):
     Helper function to assert dictionary equality after sorting their keys
     """
     assert json.dumps(left, sort_keys=True) == json.dumps(right, sort_keys=True)
+
+
+@pytest.fixture
+def load_movies_data():
+    example_movies = Path(__file__).parent.parent / 'tests/test_data/example_movies.json'
+    with open(example_movies) as f:
+        movies = json.load(f)
+
+    yield movies
