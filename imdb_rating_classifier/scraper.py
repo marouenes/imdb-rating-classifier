@@ -9,6 +9,8 @@ compatible with the schema module.
 
 The IMDB movie chart data is scraped using the requests library. The data is then parsed using the
 BeautifulSoup library.
+
+@TODO: [X] - Add support for scraping the number of reviews given to a movie.
 """
 from __future__ import annotations
 
@@ -31,15 +33,15 @@ stream_handler = logging.StreamHandler()
 stream_handler.setFormatter(formatter)
 logger.addHandler(stream_handler)
 
-# IMDB stuff
+# html tags and attributes
 IMDB_URL = 'https://www.imdb.com/chart/top/'
 # the IMDB movie chart data is stored in a table with the class "lister-list"
 IMDB_MOVIE_CHART_SELECTOR = 'tbody.lister-list tr'
 IMDB_MOVIE_RANK_SELECTOR = 'td.titleColumn'
 IMDB_MOVIE_TITLE_SELECTOR = 'td.titleColumn a'
 IMDB_MOVIE_YEAR_SELECTOR = 'td.titleColumn span.secondaryInfo'
-# get the rating and review count from the "title" attribute of the "a" tag
-IMDB_MOVIE_RATING_SELECTOR = 'td.ratingColumn strong'
+IMDB_MOVIE_RATING_SELECTOR = 'td.ratingColumn strong'  # "title" attribute of the "a" tag
+IMDB_MOVIE_VOTES_SELECTOR = 'td.ratingColumn strong'  # "title" attribute of the "strong" tag
 IMDB_MOVIE_URL_SELECTOR = 'td.titleColumn a'
 IMDB_MOVIE_POSTER_URL_SELECTOR = 'td.posterColumn a img'
 
@@ -90,6 +92,7 @@ class Scraper:
             movie_title = movie.select_one(IMDB_MOVIE_TITLE_SELECTOR).text.strip()
             movie_year = movie.select_one(IMDB_MOVIE_YEAR_SELECTOR).text.strip()
             movie_rating = movie.select_one(IMDB_MOVIE_RATING_SELECTOR).text.strip()
+            movie_votes = movie.select_one(IMDB_MOVIE_VOTES_SELECTOR).get('title').split()[3]
             movie_url = movie.select_one(IMDB_MOVIE_URL_SELECTOR).get('href')
             movie_poster_url = movie.select_one(IMDB_MOVIE_POSTER_URL_SELECTOR).get('src')
 
@@ -99,10 +102,36 @@ class Scraper:
                 'title': movie_title,
                 'year': movie_year,
                 'rating': movie_rating,
+                'votes': movie_votes,
                 'url': movie_url,
                 'poster_url': movie_poster_url,
+                'penalized' : False,
             }
             # append movie data object to movie chart data
             movie_chart_data.append(movie_data)
 
+        # clean movie chart data
+        movie_chart_data = self.clean_movie_chart_data(movie_chart_data)
+
         return movie_chart_data[: self.number_of_movies]
+
+    @staticmethod
+    def clean_movie_chart_data(movie_chart_data: list[dict]) -> list[dict]:
+        """
+        Clean movie chart data.
+
+        Args:
+            movie_chart_data (list[dict]): List of movie data objects.
+
+        Returns:
+            list[dict]: List of cleaned movie data objects.
+        """
+        # clean movie chart data
+        logger.info('Cleaning IMDB movie chart data...')
+        for movie in movie_chart_data:
+            # remove the parentheses from the movie year
+            movie['year'] = movie['year'].replace('(', '').replace(')', '')
+            # remove the comma from the number of votes
+            movie['votes'] = movie['votes'].replace(',', '')
+
+        return movie_chart_data
