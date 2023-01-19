@@ -10,10 +10,14 @@ import click
 import pandas as pd
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from imdb_rating_classifier.penalizer import penalize_reviews  # noqa: E402
+from imdb_rating_classifier.schema import MovieChart, validate  # noqa: E402
 from imdb_rating_classifier.scraper import Scraper, logger  # noqa: E402
 
 # help context
 CONTEXT_SETTINGS = dict(help_option_names=['-h', '--help'])
+# get the base directory
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 @click.group(
@@ -37,7 +41,7 @@ def main(ctx: click.Context) -> None:
 @click.option(
     '--output',
     type=click.Path(exists=False, file_okay=True, dir_okay=False),
-    default='data.csv',
+    default=f'{BASE_DIR}/data/movies.csv',
     help='The path to the output file.',
 )
 @click.option(
@@ -46,13 +50,12 @@ def main(ctx: click.Context) -> None:
     default=25,
     help='The number of movies to scrape.',
 )
-def generate(output: str, number_of_movies: int = 20) -> None:
+def generate(output: str, number_of_movies: int) -> None:
     """
     Generate the output dataset containing both
     the original and adjusted ratings.
 
-    Args:
-        output (str): The path to the output file.
+    An extra JSON file will be generated alongside the csv file
     """
     # scrape IMDB movie chart data
     scraper = Scraper(
@@ -61,17 +64,59 @@ def generate(output: str, number_of_movies: int = 20) -> None:
     )
     movies = scraper.scrape()
 
-    # convert to dataframe
-    logger.info('Converting to dataframe...')
-    output_df = pd.DataFrame(movies)
+    # convert the original set of movies to dataframe
+    logger.info('Converting to original set of movies to a dataframe...')
+    raw_input_df = pd.DataFrame(movies)
+    refined_df = validate(raw_input_df)
+    print(refined_df.head())
+
+    # recreate the movies dict from the dataframe
+    movies = refined_df.to_dict(orient='records')
+
+    # validate the movies
+    logger.info('Validating the movies...')
+    try:
+        valid_movies = [MovieChart(**movie) for movie in movies]
+    except Exception as e:
+        logger.error(e)
+        raise
+    logger.info(F'Data validation passed. The number of valid movies: {len(valid_movies)}')
+
+    # penalize the movies based on the ruleset defined in the penalizer module
+    logger.info('Penalizing movies...')
+    penalized_movies = penalize_reviews(movies)[0]
+    logger.info(f'the number of panalized movies: {len(penalized_movies)}')
+
+    # convert the penalized set of movies to dataframe
+    logger.info('Converting the set of penalized movies to a dataframe...')
+    penalized_df = pd.DataFrame(penalized_movies)
+
+    # drop the penalized column from both dataframes
+    penalized_df.drop('penalized', axis=1, inplace=True)
+    refined_df.drop('penalized', axis=1, inplace=True)
+
+    # round the ratings to 2 decimal places
+    for df in [penalized_df, refined_df]:
+        df['rating'] = df['rating'].apply(lambda x: round(x, 2))
+
+    # rename the rating column in the refined dataframe to penalized_rating
+    penalized_df.rename(columns={'rating': 'penalized_rating'}, inplace=True)
+
+    # join the two dataframes
+    logger.info('Joining the two dataframes...')
+    merged_df = refined_df.merge(penalized_df, on=None, how='left')
+
+    # sort the dataframe by rank in a descending order
+    merged_df.sort_values(by='rank', ascending=False, inplace=True)
+    print(merged_df.head())
 
     # save to csv
-    logger.info('Saving to csv...')
-    output_df.to_csv(output, index=False)
+    logger.info('Saving the dataset to csv...')
+    merged_df.to_csv(output, index=False)
 
     # save to JSON
-    logger.info('Saving to JSON...')
-    output_df.to_json(output.replace('.csv', '.json'), orient='records', indent=2)
+    logger.info('Saving a copy to JSON...')
+    merged_df.to_json(output.replace('.csv', '.json'), orient='records', indent=2)
     logger.info('Done!')
 
 

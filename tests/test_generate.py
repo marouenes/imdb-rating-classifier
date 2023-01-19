@@ -31,3 +31,14 @@ def test_generate_with_verbose(capsys: Any) -> None:
     runner = CliRunner()
     result = runner.invoke(generate, ['--verbose'])
     assert result.exit_code == 0
+
+
+def test_generate_with_invalid_flag(capsys: Any) -> None:
+    """
+    Test the generate function with an invalid flag.
+    """
+    runner = CliRunner()
+    result = runner.invoke(generate, ['--invalid'])
+    assert result.exit_code == 2
+    captured = capsys.readouterr()
+    assert captured.out == ''
