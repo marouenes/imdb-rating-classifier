@@ -1,6 +1,6 @@
 # IMDB rating classifier
 
-This is a simple IMDB rating classifier application using the IMDB charts API.
+This is a simple IMDB rating classifier application that panalizes reviews in accordance with some rulesets.
 
 ## Overview
 
@@ -36,7 +36,7 @@ We would then, extract the following fields, into a dataframe:
 - penalized (bool)
 ```
 
-Using Typedframes, we can then, preprocess the data against some schema definition rules.
+Using dataclasses, we can then, preprocess the data against some schema definition rules.
 
 The schema definition rules are as follows:
 
