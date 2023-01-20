@@ -205,6 +205,7 @@ tested using tox as an environment orchestrator and GitHub Actions.
 - [ ] Add more features
 - [X] Publish the package on PyPI
 - [ ] Add oscar awards or nominations for the movies
+- [X] Add a version switch for the cli
 
 ## License
 
