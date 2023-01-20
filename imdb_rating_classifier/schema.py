@@ -26,7 +26,6 @@ class MovieChart:
     rating: float
     votes: int
     url: str
-    poster_url: str
     penalized: bool
 
     def __post_init__(self):
@@ -73,7 +72,6 @@ class MovieChart:
             'rating': self.rating,
             'votes': self.votes,
             'url': self.url,
-            'poster_url': self.poster_url,
             'penalized': self.penalized,
         }
 
