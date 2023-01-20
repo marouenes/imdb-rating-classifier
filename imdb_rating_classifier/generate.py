@@ -10,6 +10,7 @@ import click
 import pandas as pd
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from imdb_rating_classifier import __version__  # noqa: E402
 from imdb_rating_classifier.penalizer import penalize_reviews  # noqa: E402
 from imdb_rating_classifier.schema import MovieChart, validate  # noqa: E402
 from imdb_rating_classifier.scraper import Scraper, logger  # noqa: E402
@@ -25,6 +26,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     context_settings=CONTEXT_SETTINGS,
     help='Application entry point for IMDB rating classifier.',
 )
+@click.version_option(version=__version__, prog_name='IMDB Rating Classifier')
 @click.pass_context
 def main(ctx: click.Context) -> None:
     """
