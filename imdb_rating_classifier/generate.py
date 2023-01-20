@@ -68,7 +68,6 @@ def generate(output: str, number_of_movies: int) -> None:
     logger.info('Converting to original set of movies to a dataframe...')
     raw_input_df = pd.DataFrame(movies)
     refined_df = validate(raw_input_df)
-    print(refined_df.head())
 
     # recreate the movies dict from the dataframe
     movies = refined_df.to_dict(orient='records')
@@ -84,39 +83,28 @@ def generate(output: str, number_of_movies: int) -> None:
 
     # penalize the movies based on the ruleset defined in the penalizer module
     logger.info('Penalizing movies...')
-    penalized_movies = penalize_reviews(movies)[0]
-    logger.info(f'the number of panalized movies: {len(penalized_movies)}')
+    penalized_movies = penalize_reviews(movies)
+    # check the number of penalized movies
+    number_of_penalized_movies = len(
+        [movie for movie in penalized_movies if 'penalized' in movie and movie['penalized'] is True],
+    )
+    logger.info(f'the number of panalized movies: {number_of_penalized_movies}')
 
     # convert the penalized set of movies to dataframe
     logger.info('Converting the set of penalized movies to a dataframe...')
     penalized_df = pd.DataFrame(penalized_movies)
 
-    # drop the penalized column from both dataframes
-    penalized_df.drop('penalized', axis=1, inplace=True)
-    refined_df.drop('penalized', axis=1, inplace=True)
-
-    # round the ratings to 2 decimal places
-    for df in [penalized_df, refined_df]:
-        df['rating'] = df['rating'].apply(lambda x: round(x, 2))
-
-    # rename the rating column in the refined dataframe to penalized_rating
-    penalized_df.rename(columns={'rating': 'penalized_rating'}, inplace=True)
-
-    # join the two dataframes
-    logger.info('Joining the two dataframes...')
-    merged_df = refined_df.merge(penalized_df, on=None, how='left')
-
     # sort the dataframe by rank in a descending order
-    merged_df.sort_values(by='rank', ascending=False, inplace=True)
-    print(merged_df.head())
+    penalized_df.sort_values(by='rank', ascending=False, inplace=True)
+    print(penalized_df.head())
 
     # save to csv
     logger.info('Saving the dataset to csv...')
-    merged_df.to_csv(output, index=False)
+    penalized_df.to_csv(output, index=False)
 
     # save to JSON
     logger.info('Saving a copy to JSON...')
-    merged_df.to_json(output.replace('.csv', '.json'), orient='records', indent=2)
+    penalized_df.to_json(output.replace('.csv', '.json'), orient='records', indent=2)
     logger.info('Done!')
 
 

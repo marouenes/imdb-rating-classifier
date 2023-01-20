@@ -41,9 +41,6 @@ IMDB_MOVIE_RANK_SELECTOR = 'td.titleColumn'
 IMDB_MOVIE_TITLE_SELECTOR = 'td.titleColumn a'
 IMDB_MOVIE_YEAR_SELECTOR = 'td.titleColumn span.secondaryInfo'
 IMDB_MOVIE_RATING_SELECTOR = 'td.ratingColumn strong'  # "title" attribute of the "a" tag
-IMDB_MOVIE_VOTES_SELECTOR = 'td.ratingColumn strong'  # "title" attribute of the "strong" tag
-IMDB_MOVIE_URL_SELECTOR = 'td.titleColumn a'
-IMDB_MOVIE_POSTER_URL_SELECTOR = 'td.posterColumn a img'
 
 
 class Scraper:
@@ -92,9 +89,8 @@ class Scraper:
             movie_title = movie.select_one(IMDB_MOVIE_TITLE_SELECTOR).text.strip()
             movie_year = movie.select_one(IMDB_MOVIE_YEAR_SELECTOR).text.strip()
             movie_rating = movie.select_one(IMDB_MOVIE_RATING_SELECTOR).text.strip()
-            movie_votes = movie.select_one(IMDB_MOVIE_VOTES_SELECTOR).get('title').split()[3]
-            movie_url = movie.select_one(IMDB_MOVIE_URL_SELECTOR).get('href')
-            movie_poster_url = movie.select_one(IMDB_MOVIE_POSTER_URL_SELECTOR).get('src')
+            movie_votes = movie.select_one(IMDB_MOVIE_RATING_SELECTOR).get('title').split()[3]
+            movie_url = movie.select_one(IMDB_MOVIE_TITLE_SELECTOR).get('href')
 
             # create a movie data object
             movie_data = {
@@ -104,7 +100,6 @@ class Scraper:
                 'rating': movie_rating,
                 'votes': movie_votes,
                 'url': movie_url,
-                'poster_url': movie_poster_url,
                 'penalized' : False,
             }
             # append movie data object to movie chart data
@@ -133,5 +128,40 @@ class Scraper:
             movie['year'] = movie['year'].replace('(', '').replace(')', '')
             # remove the comma from the number of votes
             movie['votes'] = movie['votes'].replace(',', '')
+            # remove the leading slash from the movie url and append the IMDB url
+            movie['url'] = movie['url'].replace('/', '', 1)
+            movie['url'] = f'https://www.imdb.com/{movie["url"]}'
 
         return movie_chart_data
+
+    # TODO: add support for the oscars data
+    @staticmethod
+    def get_movie_oscar_data(movie_url: str) -> int:
+        """
+        Get the Oscar data for a movie.
+
+        Args:
+            movie_url (str): IMDB movie URL.
+
+        Returns:
+            int: Number of Oscars won by the movie.
+        """
+        # scrape IMDB movie
+        logger.info(f'Scraping IMDB movie data for {movie_url}')
+        result = requests.get(movie_url)
+        content = result.text
+        # parse IMDB movie data
+        more_soup = BeautifulSoup(content, 'lxml')
+        element = more_soup.find_all(class_='ipc-metadata-list-item__label')
+
+        # parse movie Oscar data
+        logger.info('Parsing IMDB movie Oscar data...')
+        try:
+            extracted_text = element[6].get_text(strip=True).split()
+            if extracted_text[0] == 'Won' and 'Oscar' in extracted_text[-1]:
+                return int(extracted_text[1])
+
+        except IndexError:
+            pass
+
+        return 0
