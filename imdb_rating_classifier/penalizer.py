@@ -25,7 +25,7 @@ from __future__ import annotations
 from typing import Any
 
 
-def penalize_reviews(movies: list[dict[str, Any]]) -> tuple[list[dict[str]], list[dict[str]]]:
+def penalize_reviews(movies: list[dict[str, Any]]) -> list[dict[str, Any]]:
     """
     penalize reviews form a list of movies
 
@@ -33,34 +33,32 @@ def penalize_reviews(movies: list[dict[str, Any]]) -> tuple[list[dict[str]], lis
         movies (list[dict[str, Any]]): list of movies.
 
     Returns:
-        tuple[list[dict[str, Any]], list[dict[str, Any]]]: tuple of penalized reviews and
-        non-penalized reviews.
+        list[dict[str, Any]]: list of penalized movies.
     """
     # get max number of reviews
     max_reviews = max(movie['votes'] for movie in movies)
     # get penalized reviews
-    penalized_reviews = []
-    non_penalized_reviews = []
     for movie in movies:
-        # get number of reviews
-        review = movie['votes']
-        # get penalized review
-        to_review = movie.copy()
-        if review < max_reviews:
-            # get number of reviews difference
-            reviews_difference = max_reviews - review
-            # get the points deduction
-            points_deduction = reviews_difference / 100000 * 0.1
-            # get the penalized rating and round it to 1 decimals
-            penalized_rating = round(movie['rating'] - points_deduction, 1)
-            # update penalized review
-            to_review['rating'] = penalized_rating
-            to_review['penalized'] = True
-            # append penalized review
-            penalized_reviews.append(to_review)
+        # if the number of votes is None, raise an exception
+        if movie['votes'] is None:
+            raise ValueError('The number of reviews cannot be None or 0')
+        # get the number of reviews
         else:
-            # append non-penalized review
-            # TODO: mitigate the risk of having the same number of reviews for multiple movies?
-            non_penalized_reviews.append(to_review)
+            review = movie['votes']
+            # if the number of reviews is less than the max number of reviews then penalize
+            # else keep the rating as is and set penalized to False
+            if review == max_reviews:
+                movie['penalized'] = False
+                movie['penalized_rating'] = None
+            else:
+                # get number of reviews difference
+                reviews_difference = max_reviews - review
+                # get the points deduction
+                points_deduction = reviews_difference / 100000 * 0.1
+                # get the penalized rating and round it to 1 decimals
+                penalized_rating = round(movie['rating'] - points_deduction, 1)
+                # update penalized review
+                movie['penalized_rating'] = penalized_rating
+                movie['penalized'] = True
 
-    return penalized_reviews, non_penalized_reviews
+    return movies
