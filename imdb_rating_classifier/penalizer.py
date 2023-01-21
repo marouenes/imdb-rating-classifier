@@ -77,6 +77,12 @@ def oscar_calculation(movies: dict[str, Any]) -> dict[str, Any]:
     >>> for 3 to 5 oscars: penalized_rating = penalized_rating + 0.5
     >>> for 6 to 10 oscars: penalized_rating = penalized_rating + 1.0
     >>> for 11 or more oscars: penalized_rating = penalized_rating + 1.5
+
+    Args:
+        movies (dict[str, Any]): list of movies.
+
+    Returns:
+        dict[str, Any]: list of penalized movies.
     """
     if movies['penalized'] is False:
         pass
