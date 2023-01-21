@@ -1,5 +1,17 @@
 # IMDB rating classifier
 
+## Table of Contents
+
+- [Overview](#overview)
+- [Requirements](#requirements)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Testing](#testing)
+- [CI/CD](#cicd)
+- [TODO](#todo)
+- [License](#license)
+- [Author](#author)
+
 This is a simple IMDB rating classifier application that panalizes reviews in accordance with some pre-defined ruleset.
 
 ## Overview
@@ -8,7 +20,7 @@ The application scrapes data from [IMDB](https://www.imdb.com/chart/top/) and ad
 
 The data is scraped from the IMDB charts API using the [BeautifulSoup](https://www.crummy.com/software/BeautifulSoup/bs4/doc/) library.
 
-The data structure of the parsed payload is as follows (example):
+The data structure of the parsed and normalized payload is as follows (example):
 
 ```json
 {
@@ -200,10 +212,10 @@ tested using tox as an environment orchestrator and GitHub Actions.
 
 ## TODO
 
-- [ ] Add more tests
+- [X] Add more tests
 - [X] Add more validation rules
 - [X] Add more documentation
-- [ ] Add more features
+- [ ] Add more features!
 - [X] Publish the package on PyPI
 - [X] Add oscar awards or nominations for the movies
 - [X] Add a version switch for the cli
