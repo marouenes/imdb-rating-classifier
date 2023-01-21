@@ -16,7 +16,7 @@
 - [License](#license)
 - [Author](#author)
 
-This is a simple IMDB rating classifier application that panalizes reviews in accordance with some pre-defined ruleset.
+This is a simple [IMDB rating classifier](https://imdb-rating-classifier.readthedocs.io/en/latest/) application that panalizes reviews in accordance with some pre-defined ruleset.
 
 ## Overview
 
