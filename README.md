@@ -1,10 +1,10 @@
 # IMDB rating classifier
 
-This is a simple IMDB rating classifier application that panalizes reviews in accordance with some rulesets.
+This is a simple IMDB rating classifier application that panalizes reviews in accordance with some pre-defined ruleset.
 
 ## Overview
 
-The application scrapes data from [IMDB](https://www.imdb.com/chart/top/) and adjusts the rating system according to some specific validation rules.
+The application scrapes data from [IMDB](https://www.imdb.com/chart/top/) and adjusts the rating system according to some specific validation rules (review penalization).
 
 The data is scraped from the IMDB charts API using the [BeautifulSoup](https://www.crummy.com/software/BeautifulSoup/bs4/doc/) library.
 
@@ -18,7 +18,7 @@ The data structure of the parsed payload is as follows (example):
   "rating": "9.2",
   "votes": "2,223,000",
   "url": "/title/tt0111161/",
-  "poster_url": "https://m.media-amazon.com/images/wNjQ5NjU3MjE@._V1_SX300.jpg",
+  "oscars_won": 0,
   "penalized": false
 }
 ```
@@ -32,13 +32,13 @@ We would then, extract the following fields, into a dataframe:
 - rating (float)
 - votes (int)
 - url (str)
-- poster_url (str)
+- oscars_won (int)
 - penalized (bool)
 ```
 
-Using dataclasses, we can then, preprocess the data against some schema definition rules.
+Using dataclasses, we can then, preprocess the data against some schema definition.
 
-The schema definition rules are as follows:
+The rules are as follows:
 
 ```python
 schema = {
@@ -73,8 +73,9 @@ schema = {
         "type": "str",
         "required": True,
     },
-    "poster_url": {
-        "type": "str",
+    "oscars_won": {
+        "type": "int",
+        "min": 0,
         "required": True,
     },
     "penalized": {
@@ -204,7 +205,7 @@ tested using tox as an environment orchestrator and GitHub Actions.
 - [X] Add more documentation
 - [ ] Add more features
 - [X] Publish the package on PyPI
-- [ ] Add oscar awards or nominations for the movies
+- [X] Add oscar awards or nominations for the movies
 - [X] Add a version switch for the cli
 
 ## License
