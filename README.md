@@ -220,6 +220,8 @@ tested using tox as an environment orchestrator and GitHub Actions.
 - [X] Add more validation rules
 - [X] Add more documentation
 - [ ] Add more features!
+- [X] Add a readthedocs page
+- [ ] Describe code in readthedocs
 - [X] Publish the package on PyPI
 - [X] Add oscar awards or nominations for the movies
 - [X] Add a version switch for the cli
