@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import os
 import sys
+from concurrent.futures import ThreadPoolExecutor
 
 import click
 import pandas as pd
@@ -12,8 +13,8 @@ import pandas as pd
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from imdb_rating_classifier import __version__  # noqa: E402
 from imdb_rating_classifier.penalizer import penalize_reviews  # noqa: E402
-from imdb_rating_classifier.schema import MovieChart, validate  # noqa: E402
-from imdb_rating_classifier.scraper import Scraper, logger  # noqa: E402
+from imdb_rating_classifier.schema import MovieChart, normalize  # noqa: E402
+from imdb_rating_classifier.scraper import Scraper, get_movie_oscar_data, logger  # noqa: E402
 
 # help context
 CONTEXT_SETTINGS = dict(help_option_names=['-h', '--help'])
@@ -66,10 +67,19 @@ def generate(output: str, number_of_movies: int) -> None:
     )
     movies = scraper.scrape()
 
+    # get the oscars winners data
+    logger.info('Getting the Oscar winners data...')
+    # speed up the process
+    with ThreadPoolExecutor(max_workers=10) as executor:
+        results = executor.map(get_movie_oscar_data, [movie['url'] for movie in movies])
+    # add the oscars data to the movies
+    for movie, result in zip(movies, results):
+        movie['oscars_won'] = result
+
     # convert the original set of movies to dataframe
     logger.info('Converting to original set of movies to a dataframe...')
     raw_input_df = pd.DataFrame(movies)
-    refined_df = validate(raw_input_df)
+    refined_df = normalize(raw_input_df)
 
     # recreate the movies dict from the dataframe
     movies = refined_df.to_dict(orient='records')

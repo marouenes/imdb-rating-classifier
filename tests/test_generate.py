@@ -29,7 +29,7 @@ def test_generate_with_verbose(capsys: Any) -> None:
     Test the generate function with the verbose flag.
     """
     runner = CliRunner()
-    result = runner.invoke(generate, ['--verbose'])
+    result = runner.invoke(generate, ['-v'])
     assert result.exit_code == 0
 
 

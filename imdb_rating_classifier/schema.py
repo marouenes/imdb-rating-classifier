@@ -26,6 +26,7 @@ class MovieChart:
     rating: float
     votes: int
     url: str
+    oscars_won : int
     penalized: bool
 
     def __post_init__(self):
@@ -52,6 +53,10 @@ class MovieChart:
         if not isinstance(self.penalized, bool):
             raise ValueError(f'Invalid penalized: {self.penalized}')
 
+        # validate that the oscars won is an integer
+        if not isinstance(self.oscars_won, int):
+            raise ValueError(f'Invalid oscars_won: {self.oscars_won}')
+
     def __repr__(self) -> str:
         """
         Movie chart representation
@@ -72,11 +77,12 @@ class MovieChart:
             'rating': self.rating,
             'votes': self.votes,
             'url': self.url,
+            'oscars_won': self.oscars_won,
             'penalized': self.penalized,
         }
 
 
-def validate(movies_df: pd.DataFrame) -> pd.DataFrame:
+def normalize(movies_df: pd.DataFrame) -> pd.DataFrame:
     """
     Cast the Dataframe columns to the correct type.
 

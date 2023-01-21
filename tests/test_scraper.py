@@ -4,6 +4,7 @@ Unit tests for imdb_rating_classifier/scraper.py
 from __future__ import annotations
 
 import pytest  # noqa: F401 # imported but unused
+from bs4 import BeautifulSoup
 
 from imdb_rating_classifier.scraper import Scraper
 from testing.fixtures import load_movies_data  # noqa: F401 # imported but unused
@@ -49,3 +50,14 @@ def test_scraper_with_some_movies(load_movies_data: dict) -> None:  # noqa: F811
     movies = scraper.scrape()
     # check if the test data contains the same keys as the scraped data
     assert set(movies[0].keys()) == set(load_movies_data.keys())
+
+
+def test_load_test_data() -> BeautifulSoup:
+    """
+    Load the test data.
+    """
+    with open('tests/test_data/dummy_site.html') as file:
+        soup = BeautifulSoup(file.read(), 'html.parser')
+        content = soup.find_all('h1')[0].text
+
+    assert content == 'Won 3 Oscars. Another 5 wins & 5 nominations.'

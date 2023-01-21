@@ -5,7 +5,6 @@ from __future__ import annotations
 
 import json
 import tempfile
-from pathlib import Path
 from typing import Any
 
 import pytest
@@ -30,7 +29,7 @@ def assert_json_equal(left: dict[str, Any], right: dict[str, Any]):
 
 @pytest.fixture
 def load_movies_data():
-    example_movies = Path(__file__).parent.parent / 'tests/test_data/example_movies.json'
+    example_movies = 'tests/test_data/dummy_movie.json'
     with open(example_movies) as f:
         movies = json.load(f)
 
