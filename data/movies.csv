@@ -1,26 +1,26 @@
-rank,title,year,rating,votes,url,penalized,penalized_rating
-25,Az élet szép,1997,8.6,698325,https://www.imdb.com/title/tt0118799/,True,6.6
-24,Ryan közlegény megmentése,1998,8.6,1396418,https://www.imdb.com/title/tt0120815/,True,7.3
-23,Isten városa,2002,8.6,759862,https://www.imdb.com/title/tt0317248/,True,6.7
-22,A bárányok hallgatnak,1991,8.6,1437735,https://www.imdb.com/title/tt0102926/,True,7.3
-21,Az élet csodaszép,1946,8.6,465277,https://www.imdb.com/title/tt0038650/,True,6.4
-20,A hét szamuráj,1954,8.6,347937,https://www.imdb.com/title/tt0047478/,True,6.3
-19,Hetedik,1995,8.6,1659019,https://www.imdb.com/title/tt0114369/,True,7.6
-18,Száll a kakukk fészkére,1975,8.6,1011344,https://www.imdb.com/title/tt0073486/,True,6.9
-17,Nagymenők,1990,8.7,1166291,https://www.imdb.com/title/tt0099685/,True,7.2
-16,Mátrix,1999,8.7,1919171,https://www.imdb.com/title/tt0133093/,True,7.9
-15,A Birodalom visszavág,1980,8.7,1296816,https://www.imdb.com/title/tt0080684/,True,7.3
-14,Eredet,2010,8.7,2360790,https://www.imdb.com/title/tt1375666/,True,8.4
-13,A Gyűrűk Ura: A két torony,2002,8.7,1672441,https://www.imdb.com/title/tt0167261/,True,7.7
-12,Harcosok klubja,1999,8.7,2133631,https://www.imdb.com/title/tt0137523/,True,8.1
-11,Forrest Gump,1994,8.8,2086761,https://www.imdb.com/title/tt0109830/,True,8.2
-10,"A Jó, a Rossz és a Csúf",1966,8.8,764739,https://www.imdb.com/title/tt0060196/,True,6.9
-9,A Gyűrűk Ura: A gyűrű szövetsége,2001,8.8,1881637,https://www.imdb.com/title/tt0120737/,True,8.0
-8,Ponyvaregény,1994,8.8,2062591,https://www.imdb.com/title/tt0110912/,True,8.2
-7,A Gyűrűk Ura: A király visszatér,2003,8.9,1852027,https://www.imdb.com/title/tt0167260/,True,8.1
-6,Schindler listája,1993,8.9,1359612,https://www.imdb.com/title/tt0108052/,True,7.6
-5,Tizenkét dühös ember,1957,9.0,794079,https://www.imdb.com/title/tt0050083/,True,7.1
-4,A keresztapa II,1974,9.0,1275400,https://www.imdb.com/title/tt0071562/,True,7.6
-3,A sötét lovag,2008,9.0,2661536,https://www.imdb.com/title/tt0468569/,True,9.0
-2,A keresztapa,1972,9.2,1864292,https://www.imdb.com/title/tt0068646/,True,8.4
-1,A remény rabjai,1994,9.2,2688138,https://www.imdb.com/title/tt0111161/,False,
+rank,title,year,rating,votes,url,penalized,oscars_won,penalized_rating
+25,Az élet szép,1997,8.6,698402,https://www.imdb.com/title/tt0118799/,True,3,7.1
+24,Ryan közlegény megmentése,1998,8.6,1396560,https://www.imdb.com/title/tt0120815/,True,5,8.3
+23,Isten városa,2002,8.6,759918,https://www.imdb.com/title/tt0317248/,True,0,6.7
+22,A bárányok hallgatnak,1991,8.6,1437900,https://www.imdb.com/title/tt0102926/,True,5,8.3
+21,Az élet csodaszép,1946,8.6,465320,https://www.imdb.com/title/tt0038650/,True,0,6.4
+20,A hét szamuráj,1954,8.6,347961,https://www.imdb.com/title/tt0047478/,True,0,6.3
+19,Hetedik,1995,8.6,1659223,https://www.imdb.com/title/tt0114369/,True,0,7.6
+18,Száll a kakukk fészkére,1975,8.6,1011410,https://www.imdb.com/title/tt0073486/,True,5,7.9
+17,Nagymenők,1990,8.7,1166428,https://www.imdb.com/title/tt0099685/,True,1,7.5
+16,Mátrix,1999,8.7,1919379,https://www.imdb.com/title/tt0133093/,True,4,8.9
+15,A Birodalom visszavág,1980,8.7,1296953,https://www.imdb.com/title/tt0080684/,True,1,7.6
+14,Eredet,2010,8.7,2361077,https://www.imdb.com/title/tt1375666/,True,4,9.4
+13,A Gyűrűk Ura: A két torony,2002,8.7,1672634,https://www.imdb.com/title/tt0167261/,True,2,8.0
+12,Harcosok klubja,1999,8.7,2133914,https://www.imdb.com/title/tt0137523/,True,0,8.1
+11,Forrest Gump,1994,8.8,2087033,https://www.imdb.com/title/tt0109830/,True,6,9.2
+10,"A Jó, a Rossz és a Csúf",1966,8.8,764810,https://www.imdb.com/title/tt0060196/,True,0,6.9
+9,A Gyűrűk Ura: A gyűrű szövetsége,2001,8.8,1881840,https://www.imdb.com/title/tt0120737/,True,4,9.0
+8,Ponyvaregény,1994,8.8,2062862,https://www.imdb.com/title/tt0110912/,True,1,8.5
+7,A Gyűrűk Ura: A király visszatér,2003,8.9,1852247,https://www.imdb.com/title/tt0167260/,True,11,9.6
+6,Schindler listája,1993,8.9,1359757,https://www.imdb.com/title/tt0108052/,True,7,7.6
+5,Tizenkét dühös ember,1957,9.0,794170,https://www.imdb.com/title/tt0050083/,True,0,7.1
+4,A keresztapa II,1974,9.0,1275562,https://www.imdb.com/title/tt0071562/,True,6,8.6
+3,A sötét lovag,2008,9.0,2661841,https://www.imdb.com/title/tt0468569/,True,2,9.3
+2,A keresztapa,1972,9.2,1864529,https://www.imdb.com/title/tt0068646/,True,3,8.9
+1,A remény rabjai,1994,9.2,2688406,https://www.imdb.com/title/tt0111161/,False,0,

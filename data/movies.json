@@ -4,29 +4,32 @@
     "title":"Az \u00e9let sz\u00e9p",
     "year":1997,
     "rating":8.6,
-    "votes":698325,
+    "votes":698402,
     "url":"https:\/\/www.imdb.com\/title\/tt0118799\/",
     "penalized":true,
-    "penalized_rating":6.6
+    "oscars_won":3,
+    "penalized_rating":7.1
   },
   {
     "rank":24,
     "title":"Ryan k\u00f6zleg\u00e9ny megment\u00e9se",
     "year":1998,
     "rating":8.6,
-    "votes":1396418,
+    "votes":1396560,
     "url":"https:\/\/www.imdb.com\/title\/tt0120815\/",
     "penalized":true,
-    "penalized_rating":7.3
+    "oscars_won":5,
+    "penalized_rating":8.3
   },
   {
     "rank":23,
     "title":"Isten v\u00e1rosa",
     "year":2002,
     "rating":8.6,
-    "votes":759862,
+    "votes":759918,
     "url":"https:\/\/www.imdb.com\/title\/tt0317248\/",
     "penalized":true,
+    "oscars_won":0,
     "penalized_rating":6.7
   },
   {
@@ -34,19 +37,21 @@
     "title":"A b\u00e1r\u00e1nyok hallgatnak",
     "year":1991,
     "rating":8.6,
-    "votes":1437735,
+    "votes":1437900,
     "url":"https:\/\/www.imdb.com\/title\/tt0102926\/",
     "penalized":true,
-    "penalized_rating":7.3
+    "oscars_won":5,
+    "penalized_rating":8.3
   },
   {
     "rank":21,
     "title":"Az \u00e9let csodasz\u00e9p",
     "year":1946,
     "rating":8.6,
-    "votes":465277,
+    "votes":465320,
     "url":"https:\/\/www.imdb.com\/title\/tt0038650\/",
     "penalized":true,
+    "oscars_won":0,
     "penalized_rating":6.4
   },
   {
@@ -54,9 +59,10 @@
     "title":"A h\u00e9t szamur\u00e1j",
     "year":1954,
     "rating":8.6,
-    "votes":347937,
+    "votes":347961,
     "url":"https:\/\/www.imdb.com\/title\/tt0047478\/",
     "penalized":true,
+    "oscars_won":0,
     "penalized_rating":6.3
   },
   {
@@ -64,9 +70,10 @@
     "title":"Hetedik",
     "year":1995,
     "rating":8.6,
-    "votes":1659019,
+    "votes":1659223,
     "url":"https:\/\/www.imdb.com\/title\/tt0114369\/",
     "penalized":true,
+    "oscars_won":0,
     "penalized_rating":7.6
   },
   {
@@ -74,69 +81,76 @@
     "title":"Sz\u00e1ll a kakukk f\u00e9szk\u00e9re",
     "year":1975,
     "rating":8.6,
-    "votes":1011344,
+    "votes":1011410,
     "url":"https:\/\/www.imdb.com\/title\/tt0073486\/",
     "penalized":true,
-    "penalized_rating":6.9
+    "oscars_won":5,
+    "penalized_rating":7.9
   },
   {
     "rank":17,
     "title":"Nagymen\u0151k",
     "year":1990,
     "rating":8.7,
-    "votes":1166291,
+    "votes":1166428,
     "url":"https:\/\/www.imdb.com\/title\/tt0099685\/",
     "penalized":true,
-    "penalized_rating":7.2
+    "oscars_won":1,
+    "penalized_rating":7.5
   },
   {
     "rank":16,
     "title":"M\u00e1trix",
     "year":1999,
     "rating":8.7,
-    "votes":1919171,
+    "votes":1919379,
     "url":"https:\/\/www.imdb.com\/title\/tt0133093\/",
     "penalized":true,
-    "penalized_rating":7.9
+    "oscars_won":4,
+    "penalized_rating":8.9
   },
   {
     "rank":15,
     "title":"A Birodalom visszav\u00e1g",
     "year":1980,
     "rating":8.7,
-    "votes":1296816,
+    "votes":1296953,
     "url":"https:\/\/www.imdb.com\/title\/tt0080684\/",
     "penalized":true,
-    "penalized_rating":7.3
+    "oscars_won":1,
+    "penalized_rating":7.6
   },
   {
     "rank":14,
     "title":"Eredet",
     "year":2010,
     "rating":8.7,
-    "votes":2360790,
+    "votes":2361077,
     "url":"https:\/\/www.imdb.com\/title\/tt1375666\/",
     "penalized":true,
-    "penalized_rating":8.4
+    "oscars_won":4,
+    "penalized_rating":9.4
   },
   {
     "rank":13,
     "title":"A Gy\u0171r\u0171k Ura: A k\u00e9t torony",
     "year":2002,
     "rating":8.7,
-    "votes":1672441,
+    "votes":1672634,
     "url":"https:\/\/www.imdb.com\/title\/tt0167261\/",
     "penalized":true,
-    "penalized_rating":7.7
+    "oscars_won":2,
+    "penalized_rating":8.0
   },
   {
     "rank":12,
     "title":"Harcosok klubja",
     "year":1999,
     "rating":8.7,
-    "votes":2133631,
+    "votes":2133914,
     "url":"https:\/\/www.imdb.com\/title\/tt0137523\/",
     "penalized":true,
+    "oscars_won":0,
     "penalized_rating":8.1
   },
   {
@@ -144,19 +158,21 @@
     "title":"Forrest Gump",
     "year":1994,
     "rating":8.8,
-    "votes":2086761,
+    "votes":2087033,
     "url":"https:\/\/www.imdb.com\/title\/tt0109830\/",
     "penalized":true,
-    "penalized_rating":8.2
+    "oscars_won":6,
+    "penalized_rating":9.2
   },
   {
     "rank":10,
     "title":"A J\u00f3, a Rossz \u00e9s a Cs\u00faf",
     "year":1966,
     "rating":8.8,
-    "votes":764739,
+    "votes":764810,
     "url":"https:\/\/www.imdb.com\/title\/tt0060196\/",
     "penalized":true,
+    "oscars_won":0,
     "penalized_rating":6.9
   },
   {
@@ -164,39 +180,43 @@
     "title":"A Gy\u0171r\u0171k Ura: A gy\u0171r\u0171 sz\u00f6vets\u00e9ge",
     "year":2001,
     "rating":8.8,
-    "votes":1881637,
+    "votes":1881840,
     "url":"https:\/\/www.imdb.com\/title\/tt0120737\/",
     "penalized":true,
-    "penalized_rating":8.0
+    "oscars_won":4,
+    "penalized_rating":9.0
   },
   {
     "rank":8,
     "title":"Ponyvareg\u00e9ny",
     "year":1994,
     "rating":8.8,
-    "votes":2062591,
+    "votes":2062862,
     "url":"https:\/\/www.imdb.com\/title\/tt0110912\/",
     "penalized":true,
-    "penalized_rating":8.2
+    "oscars_won":1,
+    "penalized_rating":8.5
   },
   {
     "rank":7,
     "title":"A Gy\u0171r\u0171k Ura: A kir\u00e1ly visszat\u00e9r",
     "year":2003,
     "rating":8.9,
-    "votes":1852027,
+    "votes":1852247,
     "url":"https:\/\/www.imdb.com\/title\/tt0167260\/",
     "penalized":true,
-    "penalized_rating":8.1
+    "oscars_won":11,
+    "penalized_rating":9.6
   },
   {
     "rank":6,
     "title":"Schindler list\u00e1ja",
     "year":1993,
     "rating":8.9,
-    "votes":1359612,
+    "votes":1359757,
     "url":"https:\/\/www.imdb.com\/title\/tt0108052\/",
     "penalized":true,
+    "oscars_won":7,
     "penalized_rating":7.6
   },
   {
@@ -204,9 +224,10 @@
     "title":"Tizenk\u00e9t d\u00fch\u00f6s ember",
     "year":1957,
     "rating":9.0,
-    "votes":794079,
+    "votes":794170,
     "url":"https:\/\/www.imdb.com\/title\/tt0050083\/",
     "penalized":true,
+    "oscars_won":0,
     "penalized_rating":7.1
   },
   {
@@ -214,39 +235,43 @@
     "title":"A keresztapa II",
     "year":1974,
     "rating":9.0,
-    "votes":1275400,
+    "votes":1275562,
     "url":"https:\/\/www.imdb.com\/title\/tt0071562\/",
     "penalized":true,
-    "penalized_rating":7.6
+    "oscars_won":6,
+    "penalized_rating":8.6
   },
   {
     "rank":3,
     "title":"A s\u00f6t\u00e9t lovag",
     "year":2008,
     "rating":9.0,
-    "votes":2661536,
+    "votes":2661841,
     "url":"https:\/\/www.imdb.com\/title\/tt0468569\/",
     "penalized":true,
-    "penalized_rating":9.0
+    "oscars_won":2,
+    "penalized_rating":9.3
   },
   {
     "rank":2,
     "title":"A keresztapa",
     "year":1972,
     "rating":9.2,
-    "votes":1864292,
+    "votes":1864529,
     "url":"https:\/\/www.imdb.com\/title\/tt0068646\/",
     "penalized":true,
-    "penalized_rating":8.4
+    "oscars_won":3,
+    "penalized_rating":8.9
   },
   {
     "rank":1,
     "title":"A rem\u00e9ny rabjai",
     "year":1994,
     "rating":9.2,
-    "votes":2688138,
+    "votes":2688406,
     "url":"https:\/\/www.imdb.com\/title\/tt0111161\/",
     "penalized":false,
+    "oscars_won":0,
     "penalized_rating":null
   }
 ]

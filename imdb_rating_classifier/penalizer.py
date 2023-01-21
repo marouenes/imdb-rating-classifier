@@ -50,7 +50,7 @@ def penalize_reviews(movies: list[dict[str, Any]]) -> list[dict[str, Any]]:
             if review == max_reviews:
                 movie['penalized'] = False
                 movie['penalized_rating'] = None
-            else:
+            elif review < max_reviews:  # be explicit
                 # get number of reviews difference
                 reviews_difference = max_reviews - review
                 # get the points deduction
@@ -61,4 +61,42 @@ def penalize_reviews(movies: list[dict[str, Any]]) -> list[dict[str, Any]]:
                 movie['penalized_rating'] = penalized_rating
                 movie['penalized'] = True
 
+        # re-penalize reviews based on the oscars awards
+        movie = oscar_calculation(movie)
+
     return movies
+
+
+def oscar_calculation(movies: dict[str, Any]) -> dict[str, Any]:
+    """
+    re-penalize reviews based on the oscars awards
+
+    (pseudo code)
+    >>> if penalized_rating is None and oscars_won >= 0: penalized_rating = None
+    >>> for 1 or 2 oscars: penalized_rating = penalized_rating + 0.3
+    >>> for 3 to 5 oscars: penalized_rating = penalized_rating + 0.5
+    >>> for 6 to 10 oscars: penalized_rating = penalized_rating + 1.0
+    >>> for 11 or more oscars: penalized_rating = penalized_rating + 1.5
+    """
+    if movies['penalized'] is False:
+        pass
+
+    else:
+        if movies['oscars_won'] == 0:
+            return movies
+
+        elif 1 <= movies['oscars_won'] <= 2:
+            movies['penalized_rating'] += 0.3
+            return movies
+
+        elif 3 >= movies['oscars_won'] <= 5:
+            movies['penalized_rating'] += 0.5
+            return movies
+
+        elif 6 >= movies['oscars_won'] <= 10:
+            movies['penalized_rating'] += 1.0
+            return movies
+
+        elif movies['oscars_won'] >= 11:
+            movies['penalized_rating'] += 1.5
+            return movies

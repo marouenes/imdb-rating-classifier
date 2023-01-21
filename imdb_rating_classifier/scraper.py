@@ -134,34 +134,38 @@ class Scraper:
 
         return movie_chart_data
 
-    # TODO: add support for the oscars data
-    @staticmethod
-    def get_movie_oscar_data(movie_url: str) -> int:
-        """
-        Get the Oscar data for a movie.
 
-        Args:
-            movie_url (str): IMDB movie URL.
+# TODO: add support for the oscars data
+def get_movie_oscar_data(movie_url: str) -> int:
+    """
+    Get the Oscar data for a movie.
 
-        Returns:
-            int: Number of Oscars won by the movie.
-        """
-        # scrape IMDB movie
-        logger.info(f'Scraping IMDB movie data for {movie_url}')
-        result = requests.get(movie_url)
-        content = result.text
-        # parse IMDB movie data
-        more_soup = BeautifulSoup(content, 'lxml')
-        element = more_soup.find_all(class_='ipc-metadata-list-item__label')
+    Args:
+        movie_url (str): IMDB movie URL.
 
-        # parse movie Oscar data
-        logger.info('Parsing IMDB movie Oscar data...')
-        try:
-            extracted_text = element[6].get_text(strip=True).split()
-            if extracted_text[0] == 'Won' and 'Oscar' in extracted_text[-1]:
-                return int(extracted_text[1])
+    Returns:
+        int: Number of Oscars won by the movie.
+    """
+    result = requests.get(
+        movie_url,
+        headers={
+            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) \
+                        AppleWebKit/537.36 (KHTML, like Gecko) \
+                        Chrome/70.0.3538.77 Safari/537.36',
+        },
+    )
+    content = result.text
+    # parse the html content
+    more_soup = BeautifulSoup(content, 'html.parser')
+    element = more_soup.find_all(class_='ipc-metadata-list-item__label')
 
-        except IndexError:
-            pass
+    # parse movie Oscar data
+    try:
+        extracted_text = element[6].get_text(strip=True).split()
+        if extracted_text[0] == 'Won' and 'Oscar' in extracted_text[-1]:
+            return int(extracted_text[1])
 
-        return 0
+    except IndexError:
+        pass
+
+    return 0
