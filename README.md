@@ -1,5 +1,9 @@
 # IMDB rating classifier
 
+[![Documentation Status](https://readthedocs.org/projects/imdb-rating-classifier/badge/?version=latest)](https://imdb-rating-classifier.readthedocs.io/en/latest/?badge=latest)
+[![main](https://github.com/marouenes/imdb-rating-classifier/actions/workflows/main.yml/badge.svg)](https://github.com/marouenes/imdb-rating-classifier/actions/workflows/main.yml)
+![PyPI](https://img.shields.io/pypi/v/imdb-rating-classifier)
+
 ## Table of Contents
 
 - [Overview](#overview)
