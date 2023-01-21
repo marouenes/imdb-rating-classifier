@@ -79,15 +79,18 @@ def generate(output: str, number_of_movies: int) -> None:
     # convert the original set of movies to dataframe
     logger.info('Converting to original set of movies to a dataframe...')
     raw_input_df = pd.DataFrame(movies)
+
+    # normalize the dataframe
+    logger.info('Normalizing the dataframe...')
     refined_df = normalize(raw_input_df)
 
     # recreate the movies dict from the dataframe
-    movies = refined_df.to_dict(orient='records')
+    movies_dict = refined_df.to_dict(orient='records')
 
     # validate the movies
     logger.info('Validating the movies...')
     try:
-        valid_movies = [MovieChart(**movie) for movie in movies]
+        valid_movies = [MovieChart(**movie) for movie in movies_dict]
     except Exception as e:
         logger.error(e)
         raise
@@ -95,7 +98,7 @@ def generate(output: str, number_of_movies: int) -> None:
 
     # penalize the movies based on the ruleset defined in the penalizer module
     logger.info('Penalizing movies...')
-    penalized_movies = penalize_reviews(movies)
+    penalized_movies = penalize_reviews(movies_dict)
     # check the number of penalized movies
     number_of_penalized_movies = len(
         [movie for movie in penalized_movies if 'penalized' in movie and movie['penalized'] is True],

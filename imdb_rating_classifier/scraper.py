@@ -1,8 +1,8 @@
 """
 Module for scraping IMDB movie chart data.
 
-The intent of this module is to scrape the IMDB movie chart data (TOP 250) https://www.imdb.com/chart/top/
-and return a list of movie data objects.
+The intent of this module is to scrape the IMDB movie chart data (TOP 250)
+https://www.imdb.com/chart/top/ and return a list of movie data objects.
 
 The movie data objects are defined in the schema module. We will design the data structure to be
 compatible with the schema module.
@@ -11,6 +11,7 @@ The IMDB movie chart data is scraped using the requests library. The data is the
 BeautifulSoup library.
 
 @TODO: [X] - Add support for scraping the number of reviews given to a movie.
+       [X] - Add support for scraping the oscars won by a movie.
 """
 from __future__ import annotations
 
@@ -135,7 +136,6 @@ class Scraper:
         return movie_chart_data
 
 
-# TODO: add support for the oscars data
 def get_movie_oscar_data(movie_url: str) -> int:
     """
     Get the Oscar data for a movie.
