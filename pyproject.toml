@@ -1,0 +1,72 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.version]
+path = "imdb_rating_classifier/__init__.py"
+
+[tool.hatch.build.targets.sdist]
+packages = ["imdb_rating_classifier"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["imdb_rating_classifier"]
+
+[project]
+name = "imdb_rating_classifier"
+dynamic = ["version"]
+description = "An application that scrapes data from IMDB and adjusts rating based on some rulesets."
+readme = "README.md"
+license = { file = "LICENSE" }
+authors = [
+    { name = "Marouane Skandaji", email = "marouane.skandaji@gmail.com" }
+]
+classifiers = [
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: Implementation :: CPython"
+]
+requires-python = ">=3.10"
+dependencies = [
+    "Jinja2>=3.1.2",
+    "beautifulsoup4>=4.10.0",
+    "click==8.1.3",
+    "pandas==1.5.2",
+    "requests>=2.28.1"
+]
+
+[project.urls]
+"Source Code" = "https://github.com/marouenes/imdb-rating-classifier"
+"Bug Tracker" = "https://github.com/marouenes/imdb-rating-classifier/issues"
+
+[project.scripts]
+imdb-rating-classifier = "imdb_rating_classifier.generate:main"
+
+[project.optional-dependencies]
+build = [
+    "build",
+    "sphinx",
+    "twine",
+    "wheel"
+]
+dev = [
+    "build",
+    "pre-commit",
+    "pytest",
+    "pytest-cov",
+    "pytest-mock",
+    "ruff",
+    "sphinx",
+    "twine",
+    "wheel"
+]
+qa = [
+    "pre-commit",
+    "ruff"
+]
+tests = [
+    "pytest",
+    "pytest-cov",
+    "pytest-mock"
+]

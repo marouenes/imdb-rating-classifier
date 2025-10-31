@@ -1,0 +1,53 @@
+# Ruff configuration
+line-length = 99
+target-version = "py310"
+fix = true
+
+[format]
+quote-style = "single"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"
+
+[lint]
+select = [
+    "E",     # pycodestyle errors
+    "W",     # pycodestyle warnings
+    "F",     # pyflakes
+    "I",     # isort
+    "N",     # pep8-naming
+    "TID",   # flake8-tidy-imports
+    "RUF",   # ruff-specific rules
+    "C90",   # mccabe complexity
+]
+
+ignore = [
+    "E501",    # Line too long (handled by formatter)
+    "N813",    # CamelCase imported as lowercase
+]
+
+[lint.isort]
+known-first-party = ["imdb_rating_classifier"]
+section-order = ["future", "standard-library", "third-party", "first-party", "local-folder"]
+
+[lint.flake8-tidy-imports]
+ban-relative-imports = "all"
+
+[lint.flake8-tidy-imports.banned-api]
+"logging".msg = "Use our custom logger from imdb_rating_classifier.util.logger instead"
+"print".msg = "Use logging instead of print statements"
+"pdb".msg = "Do not commit debugger imports"
+
+[lint.per-file-ignores]
+"tests/*" = [
+    "TID252",  # Relative imports are fine in tests
+    "S101",    # Allow assertions in tests
+    "B017",    # Allow broad exceptions in tests
+]
+"imdb_rating_classifier/util/*" = [
+    "TC002",   # Allow normal imports in util modules
+]
+"imdb_rating_classifier/__init__.py" = [
+    "F401",    # Unused imports in __init__ are ok
+]
+"imdb_rating_classifier/util/logger.py" = ["TID251"]
