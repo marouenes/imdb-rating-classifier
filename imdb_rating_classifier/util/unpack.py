@@ -1,6 +1,7 @@
 """
 Helpers and utilities for the imdb_rating_classifier app.
 """
+
 from __future__ import annotations
 
 import json
@@ -8,8 +9,14 @@ import typing as t
 
 import requests
 
+from imdb_rating_classifier.util.logger import setup_logger
 
-def unpack_contents(response: requests.Response, cutoff: str = None) -> list[dict[str, t.Any]]:
+logger = setup_logger(__name__)
+
+
+def unpack_contents(
+    response: requests.Response, cutoff: str | None = None
+) -> list[dict[str, t.Any]] | requests.Response:
     """
     Helper method to unpack the contents from request response,
     reporting errors in a helpful manner, if any.
@@ -33,4 +40,10 @@ def unpack_contents(response: requests.Response, cutoff: str = None) -> list[dic
             )
 
     except json.decoder.JSONDecodeError as err:
+        logger.error(
+            'JSON decode error',
+            error=str(err),
+            error_type=type(err).__name__,
+            exc_info=True,
+        )
         raise Exception(f'Error: {err}') from err

@@ -180,3 +180,4 @@ logs/
 
 # VSCode
 .vscode/
+.pip-tools-cache/

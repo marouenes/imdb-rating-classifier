@@ -103,65 +103,74 @@ schema = {
 
 ## Requirements
 
-- Python>=3.8>=3.10
-- BeautifulSoup4
-- requests
-- pytest
-- tox
-- click
-- pre-commit
-- flake8
-- black
-- isort
-
-and more...
+- Python >=3.10
+- `uv` for modern dependency management
 
 ## Installation
 
-For development purposes:
+### Development Setup
 
-- Clone the repository
+1. Clone the repository:
 
-  ```console
-  foo@bar:~$ git clone git@github.com/marouenes/imdb-rating-classifier.git
-  ```
+   ```console
+   git clone git@github.com/marouenes/imdb-rating-classifier.git
+   cd imdb-rating-classifier
+   ```
 
-- Create a virtual environment
+2. Create and activate a virtual environment:
 
-  ```console
-  foo@bar:~/imdb-rating-classifier$ virtualenv .venv
-  ```
+   ```console
+   python -m venv .venv
+   source .venv/bin/activate
+   ```
 
-- Activate the virtual environment
+3. Install the package in development mode:
 
-  ```console
-  foo@bar:~/imdb-rating-classifier$ source .venv/bin/activate
-  ```
+   ```console
+   make dev
+   ```
 
-- Install the dev dependencies
+   This will:
+   - Lock dependencies in constraints.txt
+   - Install all dependencies
+   - Install the package in editable mode
+   - Set up development tools
 
-  ```console
-  foo@bar:~/imdb-rating-classifier$ pip install -r requirements-dev.txt
-  ```
+4. Install pre-commit hooks:
 
-- Install the pre-commit hooks
+   ```console
+   pre-commit install
+   ```
 
-  ```console
-  foo@bar:~/imdb-rating-classifier$ pre-commit install
-  ```
+### Managing Dependencies
 
-For usage:
+We use `uv` with full dependency tree locking:
 
-- Install the dependencies and build the wheel
+- `requirements.in` defines our direct dependencies
+- `constraints.txt` contains the full locked dependency tree
+- `pyproject.toml` defines build system and project metadata
 
-  ```console
-  foo@bar:~/imdb-rating-classifier$ pip install -e .
-  ```
+Available dependency management commands:
 
-The application is publicly available and published on [PyPI](https://pypi.org/project/imdb-rating-classifier/) and can be installed using pip:
+- `make compile-deps` - Lock current dependencies without upgrading
+- `make sync-deps` - Sync environment to exactly match constraints.txt
+- `make update-deps` - Upgrade all dependencies to latest versions
+- `make update-dep dep=<package>` - Upgrade specific package to latest version
+
+After any update to dependencies, run `make sync-deps` to apply changes to your environment.
+
+### For Users
+
+The application is publicly available on [PyPI](https://pypi.org/project/imdb-rating-classifier/). Install using uv (recommended):
 
 ```console
-foo@bar:~$ pip install imdb-rating-classifier
+uv pip install imdb-rating-classifier -c constraints.txt
+```
+
+Or using pip:
+
+```console
+pip install imdb-rating-classifier
 ```
 
 ## Usage
@@ -201,12 +210,56 @@ imdb-rating-classifier generate --number-of-movies 100
 imdb-rating-classifier generate --number-of-movies 100 --output some_name.csv
 ```
 
-## Testing
+## Development Workflow
 
-- Run tests and pre-commit hooks
+### Testing
+
+Run the test suite:
 
 ```console
-foo@bar:~/imdb-rating-classifier$ tox
+pytest
+```
+
+### Code Quality
+
+Format and lint your code:
+
+```console
+# Run linting and formatting
+make lint
+
+# Or run commands directly
+ruff check .   # for linting
+ruff format .  # for formatting
+```
+
+### Documentation
+
+Build the documentation locally:
+
+```console
+cd docs
+make html
+```
+
+### Dependency Management
+
+We use `uv` with `constraints.txt` for deterministic builds. To add or update dependencies:
+
+1. Add unpinned dependencies to `pyproject.toml` or `requirements.in`
+2. Run `make compile-deps` to update constraints.txt
+3. Run `make sync-deps` to apply changes to your environment
+
+To upgrade dependencies:
+
+```console
+# Upgrade all dependencies
+make update-deps
+make sync-deps
+
+# Upgrade specific package
+make update-dep dep=requests
+make sync-deps
 ```
 
 ## CI/CD
@@ -216,15 +269,15 @@ tested using tox as an environment orchestrator and GitHub Actions.
 
 ## TODO
 
-- [X] Add more tests
-- [X] Add more validation rules
-- [X] Add more documentation
+- [x] Add more tests
+- [x] Add more validation rules
+- [x] Add more documentation
 - [ ] Add more features!
-- [X] Add a readthedocs page
+- [x] Add a readthedocs page
 - [ ] Describe code in readthedocs
-- [X] Publish the package on PyPI
-- [X] Add oscar awards or nominations for the movies
-- [X] Add a version switch for the cli
+- [x] Publish the package on PyPI
+- [x] Add oscar awards or nominations for the movies
+- [x] Add a version switch for the cli
 
 ## License
 

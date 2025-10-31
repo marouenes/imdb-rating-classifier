@@ -1,0 +1,20 @@
+-c constraints.txt
+
+beautifulsoup4>=4.14.2
+build
+click>=8.3.0
+Jinja2>=3.1.6
+ruff>=0.2.1
+myst-parser
+pandas>=2.3.3
+pip-tools
+pre-commit
+pytest
+pytest-cov
+pytest-mock
+requests>=2.32.5
+sphinx
+sphinx-rtd-theme
+sphinx-autodoc-typehints
+twine
+wheel
