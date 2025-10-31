@@ -3,12 +3,13 @@ Unit tests for imdb_rating_classifier/util/unpack.py
 
 @TODO: add unit tests
 """
+
 from __future__ import annotations
 
 import typing as t
 from unittest.mock import patch
 
-import pytest  # noqa: F401 # imported but unused
+import pytest  # imported but unused
 
 from imdb_rating_classifier.util.unpack import unpack_contents
 

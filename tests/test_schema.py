@@ -3,6 +3,7 @@ Unit tests for imdb_rating_classifier/schema.py
 
 @TODO: add unit tests
 """
+
 from __future__ import annotations
 
 import pandas as pd
@@ -13,18 +14,56 @@ from imdb_rating_classifier.schema import MovieChart, normalize
 
 @pytest.mark.parametrize(
     'input_data, expected_data',
-    [(
-        [
-            {'rank': 1, 'year': '2000', 'votes': 2000000, 'rating': 8, 'penalized': False},
-            {'rank': 1, 'year': '2000', 'votes': 2000000, 'rating': 8, 'penalized': False},
-            {'rank': 1, 'year': '2000', 'votes': 2000000, 'rating': 8, 'penalized': False},
-        ],
-        [
-            {'rank': 1, 'year': 2000, 'votes': 2000000, 'rating': 8.0, 'penalized': False},
-            {'rank': 1, 'year': 2000, 'votes': 2000000, 'rating': 8.0, 'penalized': False},
-            {'rank': 1, 'year': 2000, 'votes': 2000000, 'rating': 8.0, 'penalized': False},
-        ],
-    )],
+    [
+        (
+            [
+                {
+                    'rank': 1,
+                    'year': '2000',
+                    'votes': 2000000,
+                    'rating': 8,
+                    'penalized': False,
+                },
+                {
+                    'rank': 1,
+                    'year': '2000',
+                    'votes': 2000000,
+                    'rating': 8,
+                    'penalized': False,
+                },
+                {
+                    'rank': 1,
+                    'year': '2000',
+                    'votes': 2000000,
+                    'rating': 8,
+                    'penalized': False,
+                },
+            ],
+            [
+                {
+                    'rank': 1,
+                    'year': 2000,
+                    'votes': 2000000,
+                    'rating': 8.0,
+                    'penalized': False,
+                },
+                {
+                    'rank': 1,
+                    'year': 2000,
+                    'votes': 2000000,
+                    'rating': 8.0,
+                    'penalized': False,
+                },
+                {
+                    'rank': 1,
+                    'year': 2000,
+                    'votes': 2000000,
+                    'rating': 8.0,
+                    'penalized': False,
+                },
+            ],
+        )
+    ],
 )
 def test_normalize(input_data: list[dict], expected_data: list[dict]):
     """

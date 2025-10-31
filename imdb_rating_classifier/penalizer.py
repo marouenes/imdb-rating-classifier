@@ -7,7 +7,7 @@ However, it does matter how many people voted.
 The aim is to penalize those movies where the number of ratings is low.
 
 Find the movie with the maximum number of ratings (out of the TOP 20 only).
-This is going to be the benchmark. Compare every movie’s number of ratings to this
+This is going to be the benchmark. Compare each movie's number of ratings to this
 and penalize each of them based on the following rule:
 - Every 100k deviation from the maximum translates to a point deduction of 0.1.
 
@@ -20,6 +20,7 @@ For example:
        [X] - fix the logic for the numbber of ratings lookup
        (currently we are getting the higher review instead of the higher number of ratings)
 """
+
 from __future__ import annotations
 
 from typing import Any
