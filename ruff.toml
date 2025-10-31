@@ -44,9 +44,6 @@ ban-relative-imports = "all"
     "S101",    # Allow assertions in tests
     "B017",    # Allow broad exceptions in tests
 ]
-"imdb_rating_classifier/util/*" = [
-    "TC002",   # Allow normal imports in util modules
-]
 "imdb_rating_classifier/__init__.py" = [
     "F401",    # Unused imports in __init__ are ok
 ]
