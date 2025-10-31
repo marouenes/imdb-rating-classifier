@@ -10,25 +10,42 @@ help:
 	@echo '    make lint            run ruff linter and formatter'
 	@echo '    make test            run tests'
 	@echo '    make clean           clean all auxiliary files, build and test compiled files'
-	@echo '    make compile-deps    compile dependencies into requirements/*.txt'
-	@echo '    make sync-deps       sync current environment with compiled requirements'
-	@echo '    make update-deps     update and compile dependencies to newest versions'
+	@echo
+	@echo 'Dependency Management:'
+	@echo '    make compile-deps    lock current dependencies without upgrading'
+	@echo '    make sync-deps       sync environment to match constraints.txt exactly'
+	@echo '    make update-deps     upgrade all dependencies to latest versions'
+	@echo '    make update-dep dep=<package>  upgrade specific package to latest version'
 	@echo
 
-compile-deps:
+ensure-uv:
 	python -m pip install -U uv
+
+compile-deps: ensure-uv
+	# Lock current dependencies without upgrading versions
 	uv pip compile requirements.in -o constraints.txt
 
-sync-deps:
+sync-deps: ensure-uv
+	# Sync virtual environment to exactly match constraints.txt
 	uv pip sync constraints.txt
 
-update-deps:
-	python -m pip install -U uv
+update-deps: ensure-uv
+	# Upgrade all dependencies to their latest versions and recompile
 	uv pip compile --upgrade requirements.in -o constraints.txt
+	@echo "Run 'make sync-deps' to apply the updates to your environment"
 
-dev: compile-deps sync-deps
-	# install the package in development mode
-	python -m pip install --upgrade pip
+update-dep: ensure-uv
+	# Update a specific dependency. Usage: make update-dep dep=<package-name>
+	@if [ "$(dep)" = "" ]; then \
+		echo "Usage: make update-dep dep=<package-name>"; \
+		exit 1; \
+	fi
+	uv pip compile requirements.in --upgrade-package $(dep) -o constraints.txt
+	@echo "Run 'make sync-deps' to apply the update to your environment"
+
+dev: ensure-uv compile-deps
+	# Install package in development mode with all dev dependencies
+	uv pip sync constraints.txt
 	uv pip install -e .[dev]
 
 test:
