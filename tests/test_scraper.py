@@ -17,7 +17,7 @@ def test_scraper_with_invalid_url() -> None:
     Test the Scraper class with an invalid URL.
     """
     with pytest.raises(Exception):
-        scraper = Scraper(url='https://invalid-url')
+        scraper = Scraper(url='https://invalid-url')  # type: ignore
         scraper.scrape()
 
 
@@ -26,7 +26,7 @@ def test_scraper_with_no_url() -> None:
     Test the Scraper class with no URL.
     """
     with pytest.raises(Exception):
-        scraper = Scraper(url='')
+        scraper = Scraper(url='')  # type: ignore
         scraper.scrape()
 
 
@@ -56,7 +56,7 @@ def test_scraper_with_some_movies(load_movies_data: dict) -> None:
     assert set(movies[0].keys()) == set(load_movies_data.keys())
 
 
-def test_load_test_data() -> BeautifulSoup:
+def test_load_test_data() -> BeautifulSoup | None:
     """
     Load the test data.
     """

@@ -219,7 +219,7 @@ def test_penalized_reviews_with_invalid_data() -> None:
     )
 
     with pytest.raises(ValueError):
-        penalize_reviews(movies)
+        penalize_reviews(list(movies))
 
 
 def test_no_oscar_calculation() -> None:

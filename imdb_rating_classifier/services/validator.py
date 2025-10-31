@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from abc import ABC, abstractmethod
-from typing import Any, Dict, List
+from typing import Any, Dict, List, cast
 
 import pandas as pd
 
@@ -67,6 +67,7 @@ class IMDBValidationService(MovieValidationService):
         logger.info('Validating the movies...')
         movies_dict = df.to_dict(orient='records')
         try:
+            movies_dict = cast(list[dict[str, Any]], df.to_dict(orient='records'))
             valid_movies = [MovieChart(**movie) for movie in movies_dict]
             logger.info(f'Data validation passed. Valid movies: {len(valid_movies)}')
             return valid_movies

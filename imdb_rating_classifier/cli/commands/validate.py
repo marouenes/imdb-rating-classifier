@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import os
-from typing import Any
+from typing import Any, cast
 
 import pandas as pd
 
@@ -35,7 +35,7 @@ class ValidateCommand(BaseCommand):
             logger.error('Unsupported file format. Use .csv or .json.')
             raise ValueError('Unsupported file format. Use .csv or .json.')
         df = normalize(df)
-        movies = df.to_dict(orient='records')
+        movies = cast(list[dict[str, Any]], df.to_dict(orient='records'))
         try:
             valid_movies = [MovieChart(**movie) for movie in movies]
         except Exception as e:

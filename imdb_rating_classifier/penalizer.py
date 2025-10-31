@@ -68,7 +68,7 @@ def penalize_reviews(movies: list[dict[str, Any]]) -> list[dict[str, Any]]:
     return movies
 
 
-def oscar_calculation(movies: dict[str, Any]) -> dict[str, Any]:
+def oscar_calculation(movies: dict[str, Any]) -> dict[str, Any] | None:
     """
     re-penalize reviews based on the oscars awards
 

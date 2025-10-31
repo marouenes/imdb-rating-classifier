@@ -16,7 +16,7 @@ logger = setup_logger(__name__)
 
 def unpack_contents(
     response: requests.Response, cutoff: str | None = None
-) -> list[dict[str, t.Any]]:
+) -> list[dict[str, t.Any]] | requests.Response:
     """
     Helper method to unpack the contents from request response,
     reporting errors in a helpful manner, if any.

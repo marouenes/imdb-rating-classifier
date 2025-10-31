@@ -39,7 +39,7 @@ class MockHTTPClient(HTTPClient):
         self.responses = responses
         self.calls: List[tuple[str, dict | None]] = []
 
-    def get(self, url: str, headers: dict | None = None) -> MockResponse:
+    def get(self, url: str, headers: dict | None = None) -> MockResponse:  # type: ignore
         """Record call and return mock response."""
         self.calls.append((url, headers))
         if url not in self.responses:

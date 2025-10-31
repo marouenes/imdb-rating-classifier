@@ -21,6 +21,7 @@ class Scraper:
 
     def __init__(self, number_of_movies: int, url: str | None = None):
         self.number_of_movies = number_of_movies
+        self.url = url
         self._repository = IMDBRepository()
 
     def scrape(self) -> list[dict]:

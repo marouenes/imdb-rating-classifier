@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import re
 from typing import Sequence
 
 from bs4 import BeautifulSoup, Tag
@@ -76,14 +77,14 @@ class IMDBParser:
 
             # Title format is typically "1. Movie Title"
             title = title_elem.text.split('. ', 1)[-1].strip()
-            url = title_elem.parent.get('href', '')
+            url = title_elem.parent.get('href', '') if title_elem.parent else ''
 
             # Get year from metadata
             year = self._get_year(item)
 
             # Get rating and votes
             rating_elem = item.select_one(self.MOVIE_RATING_SELECTOR)
-            rating = rating_elem.get('aria-label', '0').split(' ')[0] if rating_elem else '0'
+            rating = str(rating_elem.get('aria-label', '0')).split(' ')[0] if rating_elem else '0'
 
             votes_elem = item.select_one(self.MOVIE_VOTES_SELECTOR)
             votes = votes_elem.text.strip('()').replace(',', '') if votes_elem else '0'
@@ -137,9 +138,8 @@ class IMDBParser:
             # votes may be inside the title attribute of the strong tag
             votes_attr = rating_elem.get('title', '') if rating_elem else ''
             # extract the first number found (e.g. 2,456,789) and keep commas
-            import re
 
-            votes_matches = re.findall(r'(\d[\d,]*)', votes_attr)
+            votes_matches = re.findall(r'(\d[\d,]*)', votes_attr)  # type: ignore
             # pick the last numeric group (typically the votes with commas)
             votes = votes_matches[-1] if votes_matches else '0'
 
@@ -149,7 +149,7 @@ class IMDBParser:
                 year=year,
                 rating=rating,
                 votes=votes,
-                url=url,
+                url=str(url) if url else '',
             )
         except Exception as e:
             logger.error(f'Failed to parse legacy row: {e!s}')
