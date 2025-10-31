@@ -124,20 +124,19 @@ schema = {
    source .venv/bin/activate
    ```
 
-3. Install and compile dependencies:
+3. Install the package in development mode:
 
    ```console
-   make compile-deps  # Generate locked requirements
-   make sync-deps    # Install dependencies from locked requirements
+   make dev
    ```
 
-4. Install the package in editable mode:
+   This will:
+   - Lock dependencies in constraints.txt
+   - Install all dependencies
+   - Install the package in editable mode
+   - Set up development tools
 
-   ```console
-   pip install -e .
-   ```
-
-5. Install pre-commit hooks:
+4. Install pre-commit hooks:
 
    ```console
    pre-commit install
@@ -145,26 +144,33 @@ schema = {
 
 ### Managing Dependencies
 
-We use `uv` to manage dependencies with full dependency tree locking:
+We use `uv` with full dependency tree locking:
 
-- `requirements/*.in` files define our direct dependencies
-- `requirements/*.txt` files contain the full locked dependency tree
-- `make compile-deps` to generate locked requirements
-- `make sync-deps` to sync your environment with locked requirements
-- `make update-deps` to upgrade all dependencies to their latest versions
+- `requirements.in` defines our direct dependencies
+- `constraints.txt` contains the full locked dependency tree
+- `pyproject.toml` defines build system and project metadata
+
+Available dependency management commands:
+
+- `make compile-deps` - Lock current dependencies without upgrading
+- `make sync-deps` - Sync environment to exactly match constraints.txt
+- `make update-deps` - Upgrade all dependencies to latest versions
+- `make update-dep dep=<package>` - Upgrade specific package to latest version
+
+After any update to dependencies, run `make sync-deps` to apply changes to your environment.
 
 ### For Users
 
-Install directly from PyPI with pinned dependencies:
+The application is publicly available on [PyPI](https://pypi.org/project/imdb-rating-classifier/). Install using uv (recommended):
 
 ```console
 uv pip install imdb-rating-classifier -c constraints.txt
 ```
 
-The application is publicly available and published on [PyPI](https://pypi.org/project/imdb-rating-classifier/) and can be installed using pip:
+Or using pip:
 
 ```console
-foo@bar:~$ pip install imdb-rating-classifier
+pip install imdb-rating-classifier
 ```
 
 ## Usage
@@ -219,12 +225,12 @@ pytest
 Format and lint your code:
 
 ```console
-# Format code
-black .
-isort .
+# Run linting and formatting
+make lint
 
-# Run linting
-flake8
+# Or run commands directly
+ruff check .   # for linting
+ruff format .  # for formatting
 ```
 
 ### Documentation
@@ -240,13 +246,21 @@ make html
 
 We use `uv` with `constraints.txt` for deterministic builds. To add or update dependencies:
 
-1. Add unpinned dependencies to `pyproject.toml`
-2. Add exact versions to `constraints.txt`
-3. Update your environment:
+1. Add unpinned dependencies to `pyproject.toml` or `requirements.in`
+2. Run `make compile-deps` to update constraints.txt
+3. Run `make sync-deps` to apply changes to your environment
 
-   ```console
-   uv pip install -e ".[dev]" -c constraints.txt
-   ```
+To upgrade dependencies:
+
+```console
+# Upgrade all dependencies
+make update-deps
+make sync-deps
+
+# Upgrade specific package
+make update-dep dep=requests
+make sync-deps
+```
 
 ## CI/CD
 
